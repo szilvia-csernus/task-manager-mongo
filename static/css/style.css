@@ -1,3 +1,21 @@
 body {
-    
+    font-family: 'Quicksand', sans-serif;
+    font-size: 1rem
+}
+
+nav {
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.my-logo {
+    font-size: 2.5rem;
+}
+
+.my-nav-element {
+    font-size: 1.2rem;
+}
+
+.text-shadow {
+    text-shadow: 2px 2px 2px rgba(255, 255, 255, 0.5);
 }
