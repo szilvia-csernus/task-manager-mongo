@@ -9,7 +9,7 @@ nav {
 }
 
 .my-logo {
-    font-size: 2.5rem;
+    font-size: 2.2rem;
 }
 
 .my-nav-element {
@@ -18,4 +18,8 @@ nav {
 
 .text-shadow {
     text-shadow: 2px 2px 2px rgba(255, 255, 255, 0.5);
+}
+
+.flashes h4 {
+    line-height: 2;
 }
