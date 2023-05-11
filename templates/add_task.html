@@ -4,11 +4,12 @@
 
 <div class="row card-panel grey lighten-5">
   <form class="col s12" method="POST" action="">
+    <!-- select category -->
     <div class="row">
       <div class="input-field col s12">
         <i class="fas fa-folder-open prefix grey-text text-darken-2"></i>
         <select id="category_name" name="category_name" class="validate" required>
-          <option value="" disabled selected>Choose your option</option>
+          <option value="" disabled selected>Choose Category</option>
           {% for category in categories %}
             <option value="{{ category.category_name }}">{{ category.category_name }}</option>
           {% endfor %}
@@ -16,6 +17,7 @@
         <label>Task Category</label>
       </div>
     </div>
+    <!-- task name  -->
     <div class="row">
       <div class="input-field col s12">
         <i class="fas fa-pencil-alt prefix grey-text text-darken-2"></i>
@@ -31,6 +33,7 @@
         <label for="task_name">Task Name</label>
       </div>
     </div>
+    <!-- task description  -->
     <div class="row">
       <div class="input-field col s12">
         <i class="fas fa-align-left prefix grey-text text-darken-2"></i>
@@ -45,6 +48,7 @@
         <label for="task_description">Task Description</label>
       </div>
     </div>
+    <!-- due date  -->
     <div class="row">
       <div class="input-field col s12">
         <i class="fas fa-calendar-alt prefix grey-text text-darken-2"></i>
@@ -58,6 +62,7 @@
         <label for="due_date">Due Date</label>
       </div>
     </div>
+    <!-- urgent toggle  -->
     <div class="row">
       <div class="input-field col-12">
         <div class="switch">
@@ -71,6 +76,14 @@
           </label>
         </div>
       </div>
+    </div>
+    <!-- submit button  -->
+    <div class="row">
+        <div class="col s12 center-align">
+            <button type="submit" class="btn-large teal">
+                Add Task <i class="fas fa-plus-square right"></i>
+            </button>
+        </div>
     </div>
   </form>
 </div>

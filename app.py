@@ -98,9 +98,25 @@ def signout():
     return redirect(url_for("signin"))
 
 
-@app.route("/add_task")
+@app.route("/add_task", methods=['GET', 'POST'])
 def add_task():
-    # 1 for ascending, -1 for descending
+    if request.method == "POST":
+        # request.form.to_dict() would take all name attributes from
+        # the form and would convert them to a dictionary
+        is_urgent = "on" if request.form.get("is_urgent") else "off"
+        task = {
+            # to store stg in an array, we could use 'request.form.getlist()'
+            "category_name": request.form.get("category_name"),
+            "task_name": request.form.get("task_name"),
+            "task_description": request.form.get("task_description"),
+            "is_urgent": is_urgent,
+            "due_date": request.form.get("due_date"),
+            "created_by": session["user"]
+        }
+        mongo.db.tasks.insert_one(task)
+        flash("Task Added Successfuly")
+        return redirect(url_for("get_tasks"))
+
     categories = mongo.db.categories.find().sort("category_name", 1)
     return render_template("add_task.html", categories=categories)
 
