@@ -1,5 +1,6 @@
-// navbar initialization 
+// Materialize code for initialisation 
 
 $(document).ready(function(){
     $('.sidenav').sidenav({edge: 'right'});
+    $('.collapsible').collapsible();
   });
