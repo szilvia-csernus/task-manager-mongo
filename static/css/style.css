@@ -12,8 +12,9 @@ strong {
     font-weight: 700;
 }
 
-.my-logo {
-    font-size: 2.2rem;
+nav .brand-logo {
+    left: 7rem;
+    font-size: 2rem;
 }
 
 .my-nav-element {
@@ -24,21 +25,35 @@ strong {
     text-shadow: 2px 2px 2px rgba(255, 255, 255, 0.5);
 }
 
+h3 {
+    font-size: 2rem;
+    text-transform: uppercase;
+}
+
 .flashes h4 {
     line-height: 2;
+    font-size: 1.5rem;
+    color: white;
+    background-color: rgba(38, 166, 153, 0.147)
 }
 
-.my-edit-btn {
+.my-edit-btn, .my-cancel-btn {
     background-color: white;
-    color: rgb(38, 166, 154)
+    font-weight: 700;
+    color: rgb(38, 166, 154);
 }
 
-.my-edit-btn:hover {
+.my-edit-btn:hover, .my-cancel-btn:hover {
     color: white;
 }
 
 .btn-small {
     margin: 5px;
+}
+
+.btn-large {
+    width: 14rem;
+    margin: .5rem;
 }
 
 .collapsible-header .col strong {

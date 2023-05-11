@@ -47,6 +47,9 @@ def register():
         # put the new user into 'session' cookie
         session["user"] = request.form.get("username").lower()
         flash("Registration Successful!")
+        return redirect(url_for(
+                            "profile", username=session["user"]))
+
     return render_template("register.html")
 
 
@@ -115,7 +118,7 @@ def add_task():
             "created_by": session["user"]
         }
         mongo.db.tasks.insert_one(task)
-        flash("Task Added Successfuly")
+        flash("Task Added Successfully")
         return redirect(url_for("get_tasks"))
 
     categories = mongo.db.categories.find().sort("category_name", 1)
@@ -124,10 +127,30 @@ def add_task():
 
 @app.route("/edit_task/<task_id>", methods=["GET", "POST"])
 def edit_task(task_id):
+    if request.method == "POST":
+        # request.form.to_dict() would take all name attributes from
+        # the form and would convert them to a dictionary
+        is_urgent = "on" if request.form.get("is_urgent") else "off"
+        submit = {
+            # to store stg in an array, we could use 'request.form.getlist()'
+            "category_name": request.form.get("category_name"),
+            "task_name": request.form.get("task_name"),
+            "task_description": request.form.get("task_description"),
+            "is_urgent": is_urgent,
+            "due_date": request.form.get("due_date"),
+            "created_by": session["user"]
+        }
+        mongo.db.tasks.update_one({"_id": ObjectId(task_id)}, {"$set": submit})
+        flash("Task Updated Successfully")
+    
     task = mongo.db.tasks.find_one({"_id": ObjectId(task_id)})
-
     categories = mongo.db.categories.find().sort("category_name", 1)
     return render_template("edit_task.html", task=task, categories=categories)
+
+
+@app.route("/delete_task/<task_id>", methods=["POST"])
+def delete_task(task_id):
+    return
 
 
 if __name__ == "__main__":
