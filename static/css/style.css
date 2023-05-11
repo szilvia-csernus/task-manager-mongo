@@ -33,6 +33,10 @@ strong {
     color: rgb(38, 166, 154)
 }
 
+.my-edit-btn:hover {
+    color: white;
+}
+
 .btn-small {
     margin: 5px;
 }
