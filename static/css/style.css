@@ -8,6 +8,10 @@ nav {
     padding-right: 1rem;
 }
 
+strong {
+    font-weight: 700;
+}
+
 .my-logo {
     font-size: 2.2rem;
 }
