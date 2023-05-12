@@ -35,7 +35,7 @@ def register():
             {"username": request.form.get("username").lower()})
 
         if existing_user:
-            flash("Username already exists")
+            flash("Username already exists!")
             return redirect(url_for("register"))
 
         register = {
@@ -70,12 +70,12 @@ def signin():
                             "profile", username=session["user"]))
             else:
                 # invalid password match
-                flash("Incorrect Username and/or Password")
+                flash("Incorrect Username and/or Password!")
                 return redirect(url_for("signin"))
 
         else:
             # username doesn't exist
-            flash("Incorrect Username and/or Password")
+            flash("Incorrect Username and/or Password!")
             return redirect(url_for("signin"))
 
     return render_template("signin.html")
@@ -96,7 +96,7 @@ def profile(username):
 @app.route("/signout")
 def signout():
     # remove user from session cookies
-    flash("You have been signed out")
+    flash("You have been signed out.")
     # session.clear() would clear all cookies related to our app
     session.pop("user")
     return redirect(url_for("signin"))
@@ -118,7 +118,7 @@ def add_task():
             "created_by": session["user"]
         }
         mongo.db.tasks.insert_one(task)
-        flash("Task Added Successfully")
+        flash("Task Added Successfully!")
         return redirect(url_for("get_tasks"))
 
     categories = mongo.db.categories.find().sort("category_name", 1)
@@ -141,7 +141,7 @@ def edit_task(task_id):
             "created_by": session["user"]
         }
         mongo.db.tasks.update_one({"_id": ObjectId(task_id)}, {"$set": submit})
-        flash("Task Updated Successfully")
+        flash("Task Updated Successfully!")
 
     task = mongo.db.tasks.find_one({"_id": ObjectId(task_id)})
     categories = mongo.db.categories.find().sort("category_name", 1)
@@ -151,7 +151,7 @@ def edit_task(task_id):
 @app.route("/delete_task/<task_id>")
 def delete_task(task_id):
     mongo.db.tasks.delete_one({"_id": ObjectId(task_id)})
-    flash("Task Successfully Deleted")
+    flash("Task Successfully Deleted!")
     return redirect(url_for("get_tasks"))
 
 
@@ -168,10 +168,31 @@ def add_category():
             "category_name": request.form.get("category_name")
         }
         mongo.db.categories.insert_one(category)
-        flash("New Category Added")
+        flash("New Category Added!")
         return redirect(url_for("get_categories"))
 
     return render_template("add_category.html")
+
+
+@app.route("/edit_category/<category_id>", methods=["GET", "POST"])
+def edit_category(category_id):
+    if request.method == "POST":
+        submit = {
+            "category_name": request.form.get("category_name")
+        }
+        mongo.db.categories.update_one(
+            {"_id": ObjectId(category_id)}, {"$set": submit})
+        flash("Category Edited Successfully!")
+        return redirect(url_for("get_categories"))
+
+    category = mongo.db.categories.find_one({"_id": ObjectId(category_id)})
+    return render_template("edit_category.html", category=category)
+
+
+@app.route("/delete_category/<category_id>")
+def delete_category(category_id):
+    mongo.db.categories.delete_one({"_id": ObjectId(category_id)})
+    return redirect(url_for("get_categories"))
 
 
 if __name__ == "__main__":
