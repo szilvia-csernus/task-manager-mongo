@@ -54,6 +54,7 @@ h3 {
 .btn-large {
     width: 14rem;
     margin: .5rem;
+    padding: 0 1rem;
 }
 
 .collapsible-header .col strong {
