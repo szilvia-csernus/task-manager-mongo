@@ -1,3 +1,6 @@
+Simple Task Manager app created by following the walkthough tutorial by Tim Nelson [Code Institute](https://codeinstitute.net)
+
+
 ![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
 
 Welcome,
